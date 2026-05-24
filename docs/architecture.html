@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Jenny's Mod — Architecture Diagram</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0b0d17;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;font-family:"Courier New",monospace;padding:40px 20px}
+.page{width:960px;background:#0f1420;border:1px solid #2d3748;border-radius:12px;padding:48px;color:#c9d1d9}
+h1{text-align:center;font-size:22px;color:#cd7dff;letter-spacing:4px;text-transform:uppercase;margin-bottom:6px}
+.sub{text-align:center;font-size:11px;color:#4a5568;letter-spacing:2px;margin-bottom:44px}
+svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:32px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.leg{display:flex;align-items:center;gap:8px;font-size:11px;color:#6e7681}
+.leg-line{width:28px;height:2px}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Jenny's Mod</h1>
+  <div class="sub">Cloud Architecture Diagram · Supabase + Vercel Stack</div>
+  <svg viewBox="0 0 860 560" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#cd7dff" opacity=".8"/></marker>
+      <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#10b981" opacity=".8"/></marker>
+      <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#f59e0b" opacity=".8"/></marker>
+      <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#8b5cf6" opacity=".8"/></marker>
+    </defs>
+
+    <!-- Layer bands -->
+    <rect x="0" y="0" width="860" height="90" rx="0" fill="rgba(99,102,241,.04)"/>
+    <rect x="0" y="100" width="860" height="100" rx="0" fill="rgba(16,185,129,.03)"/>
+    <rect x="0" y="210" width="860" height="120" rx="0" fill="rgba(139,92,246,.04)"/>
+    <rect x="0" y="340" width="860" height="110" rx="0" fill="rgba(245,158,11,.03)"/>
+    <rect x="0" y="460" width="860" height="100" rx="0" fill="rgba(59,130,246,.03)"/>
+
+    <!-- Layer labels -->
+    <text x="12" y="50" fill="#2d3748" font-size="9" font-family="Courier New" letter-spacing="2" transform="rotate(-90,12,50)">CLIENT</text>
+    <text x="12" y="155" fill="#2d3748" font-size="9" font-family="Courier New" letter-spacing="2" transform="rotate(-90,12,155)">CDN/EDGE</text>
+    <text x="12" y="275" fill="#2d3748" font-size="9" font-family="Courier New" letter-spacing="2" transform="rotate(-90,12,275)">SERVERLESS</text>
+    <text x="12" y="400" fill="#2d3748" font-size="9" font-family="Courier New" letter-spacing="2" transform="rotate(-90,12,400)">DATABASE</text>
+    <text x="12" y="515" fill="#2d3748" font-size="9" font-family="Courier New" letter-spacing="2" transform="rotate(-90,12,515)">STORAGE</text>
+
+    <!-- Dividers -->
+    <line x1="28" y1="97" x2="860" y2="97" stroke="#1a2030" stroke-width="1"/>
+    <line x1="28" y1="207" x2="860" y2="207" stroke="#1a2030" stroke-width="1"/>
+    <line x1="28" y1="337" x2="860" y2="337" stroke="#1a2030" stroke-width="1"/>
+    <line x1="28" y1="457" x2="860" y2="457" stroke="#1a2030" stroke-width="1"/>
+
+    <!-- ── LAYER 1: CLIENT ── -->
+    <!-- User Browser -->
+    <rect x="60" y="15" width="160" height="65" rx="8" fill="#111827" stroke="#cd7dff" stroke-width="1.5"/>
+    <text x="140" y="38" fill="#cd7dff" font-size="10" font-family="Courier New" text-anchor="middle" font-weight="bold">USER BROWSER</text>
+    <text x="140" y="54" fill="#6e7681" font-size="9" font-family="Courier New" text-anchor="middle">React SPA (Vite)</text>
+    <text x="140" y="68" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">react-router · lucide-react</text>
+
+    <!-- ── LAYER 2: CDN/EDGE ── -->
+    <!-- Vercel -->
+    <rect x="60" y="112" width="160" height="75" rx="8" fill="#111827" stroke="#10b981" stroke-width="1.5"/>
+    <text x="140" y="133" fill="#10b981" font-size="10" font-family="Courier New" text-anchor="middle" font-weight="bold">VERCEL EDGE</text>
+    <text x="140" y="148" fill="#6e7681" font-size="9" font-family="Courier New" text-anchor="middle">Static Host + CDN</text>
+    <text x="140" y="162" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">HTTPS · Auto SSL · Global</text>
+    <text x="140" y="175" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">dist/ → CDN cache</text>
+
+    <!-- Supabase CDN -->
+    <rect x="280" y="112" width="160" height="75" rx="8" fill="#111827" stroke="#10b981" stroke-width="1.5"/>
+    <text x="360" y="133" fill="#10b981" font-size="10" font-family="Courier New" text-anchor="middle" font-weight="bold">SUPABASE CDN</text>
+    <text x="360" y="148" fill="#6e7681" font-size="9" font-family="Courier New" text-anchor="middle">Public Asset Delivery</text>
+    <text x="360" y="162" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">Cover images + mod files</text>
+    <text x="360" y="175" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">Cache-Control headers</text>
+
+    <!-- Supabase Auth -->
+    <rect x="500" y="112" width="160" height="75" rx="8" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="580" y="133" fill="#f59e0b" font-size="10" font-family="Courier New" text-anchor="middle" font-weight="bold">SUPABASE AUTH</text>
+    <text x="580" y="148" fill="#6e7681" font-size="9" font-family="Courier New" text-anchor="middle">Email / Password</text>
+    <text x="580" y="162" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">JWT tokens · Sessions</text>
+    <text x="580" y="175" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">Row Level Security</text>
+
+    <!-- ── LAYER 3: SERVERLESS ── -->
+    <rect x="60" y="220" width="620" height="105" rx="8" fill="#111827" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="370" y="240" fill="#8b5cf6" font-size="10" font-family="Courier New" text-anchor="middle" font-weight="bold">SUPABASE EDGE FUNCTIONS  ·  Deno Runtime  ·  Serverless</text>
+
+    <!-- Function boxes -->
+    <rect x="80" y="252" width="120" height="58" rx="5" fill="#1a1f35" stroke="#8b5cf6" stroke-width="1" opacity=".9"/>
+    <text x="140" y="270" fill="#8b5cf6" font-size="9" font-family="Courier New" text-anchor="middle" font-weight="bold">mods/</text>
+    <text x="140" y="284" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">GET list</text>
+    <text x="140" y="296" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">POST create</text>
+    <text x="140" y="303" fill="#4a5568" font-size="7" font-family="Courier New" text-anchor="middle">filter·search·cache</text>
+
+    <rect x="222" y="252" width="120" height="58" rx="5" fill="#1a1f35" stroke="#8b5cf6" stroke-width="1" opacity=".9"/>
+    <text x="282" y="270" fill="#8b5cf6" font-size="9" font-family="Courier New" text-anchor="middle" font-weight="bold">download-track/</text>
+    <text x="282" y="284" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Atomic counter++</text>
+    <text x="282" y="296" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Log download event</text>
+    <text x="282" y="303" fill="#4a5568" font-size="7" font-family="Courier New" text-anchor="middle">RPC · observability</text>
+
+    <rect x="364" y="252" width="120" height="58" rx="5" fill="#1a1f35" stroke="#8b5cf6" stroke-width="1" opacity=".9"/>
+    <text x="424" y="270" fill="#8b5cf6" font-size="9" font-family="Courier New" text-anchor="middle" font-weight="bold">upload/</text>
+    <text x="424" y="284" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Signed URL gen</text>
+    <text x="424" y="296" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">File validation</text>
+    <text x="424" y="303" fill="#4a5568" font-size="7" font-family="Courier New" text-anchor="middle">Auth check</text>
+
+    <rect x="506" y="252" width="154" height="58" rx="5" fill="#1a1f35" stroke="#8b5cf6" stroke-width="1" opacity=".9"/>
+    <text x="583" y="270" fill="#8b5cf6" font-size="9" font-family="Courier New" text-anchor="middle" font-weight="bold">Supabase SDK (client)</text>
+    <text x="583" y="284" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Direct DB queries</text>
+    <text x="583" y="296" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Auth state management</text>
+    <text x="583" y="303" fill="#4a5568" font-size="7" font-family="Courier New" text-anchor="middle">Realtime subscriptions</text>
+
+    <!-- ── LAYER 4: DATABASE ── -->
+    <rect x="60" y="350" width="260" height="95" rx="8" fill="#111827" stroke="#cd7dff" stroke-width="1.5"/>
+    <text x="190" y="371" fill="#cd7dff" font-size="10" font-family="Courier New" text-anchor="middle" font-weight="bold">POSTGRESQL</text>
+    <text x="190" y="386" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">Supabase Managed Database</text>
+    <text x="190" y="400" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Tables: profiles · mods · download_logs</text>
+    <text x="190" y="413" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">RLS Policies · Triggers · Indexes</text>
+    <text x="190" y="426" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">PITR · Automatic backups</text>
+    <text x="190" y="437" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">increment_download() RPC</text>
+
+    <!-- Observability -->
+    <rect x="360" y="350" width="320" height="95" rx="8" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="520" y="371" fill="#f59e0b" font-size="10" font-family="Courier New" text-anchor="middle" font-weight="bold">OBSERVABILITY + COST CONTROLS</text>
+    <text x="520" y="387" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Supabase Dashboard → Edge Function Logs</text>
+    <text x="520" y="400" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Supabase Reports → Query perf + table sizes</text>
+    <text x="520" y="413" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Vercel Analytics → Web vitals + traffic</text>
+    <text x="520" y="426" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">Supabase Billing → Usage alerts</text>
+    <text x="520" y="437" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">Free tier: 500MB DB · 1GB Storage · 2M fn calls</text>
+
+    <!-- ── LAYER 5: STORAGE ── -->
+    <rect x="60" y="468" width="420" height="78" rx="8" fill="#111827" stroke="#10b981" stroke-width="1.5"/>
+    <text x="270" y="488" fill="#10b981" font-size="10" font-family="Courier New" text-anchor="middle" font-weight="bold">SUPABASE STORAGE  (S3-compatible Object Storage)</text>
+    <text x="270" y="503" fill="#6e7681" font-size="8" font-family="Courier New" text-anchor="middle">Bucket: mod-assets (public)</text>
+    <text x="270" y="516" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">covers/{user_id}/{timestamp}.{ext}   ·   mods/{user_id}/{timestamp}.{ext}</text>
+    <text x="270" y="529" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">RLS storage policies · Served via Supabase CDN</text>
+    <text x="270" y="536" fill="#4a5568" font-size="8" font-family="Courier New" text-anchor="middle">Max file size: configurable (default 50MB)</text>
+
+    <!-- ── ARROWS ── -->
+    <!-- Browser ↔ Vercel -->
+    <line x1="140" y1="80" x2="140" y2="110" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr-green)"/>
+    <!-- Browser → Auth -->
+    <line x1="220" y1="48" x2="498" y2="148" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-orange)"/>
+    <!-- Browser → Supabase CDN (asset fetch) -->
+    <line x1="220" y1="60" x2="278" y2="150" stroke="#10b981" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr-green)"/>
+    <!-- Vercel → Edge Functions -->
+    <line x1="140" y1="187" x2="200" y2="218" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+    <!-- Auth → Edge Functions -->
+    <line x1="580" y1="187" x2="540" y2="218" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-orange)"/>
+    <!-- Edge Functions → PostgreSQL -->
+    <line x1="200" y1="325" x2="190" y2="348" stroke="#cd7dff" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+    <!-- Edge Functions → Storage -->
+    <line x1="300" y1="325" x2="220" y2="465" stroke="#10b981" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-green)"/>
+    <!-- Edge Functions → Observability -->
+    <line x1="560" y1="325" x2="520" y2="348" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-orange)"/>
+    <!-- Storage → CDN -->
+    <line x1="360" y1="468" x2="360" y2="190" stroke="#10b981" stroke-width="1" stroke-dasharray="3,4" marker-end="url(#arr-green)" opacity=".5"/>
+  </svg>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-line" style="background:#cd7dff"></div>Data / DB flow</div>
+    <div class="leg"><div class="leg-line" style="background:#10b981"></div>Asset / storage flow</div>
+    <div class="leg"><div class="leg-line" style="background:#f59e0b;height:2px;background:repeating-linear-gradient(90deg,#f59e0b 0,#f59e0b 6px,transparent 6px,transparent 10px)"></div>Auth flow</div>
+    <div class="leg"><div class="leg-line" style="background:#8b5cf6"></div>Serverless invocation</div>
+  </div>
+</div>
+</body>
+</html>
