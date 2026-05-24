@@ -1,3 +1,5 @@
+PLEASE DELETE THE "t" FROM ANY FILES WITH A "t." BECAUSE I AM UNFORTUNATELY UNABLE TO UPLOAD A FILE WITH "." AS THE STARTING AS IT WOULD THINK THAT IT IS A HIDDEN FILE. THANK YOU VERY MUCH
+
 # Jenny's Mod 🎮
 
 A community-driven mod hosting platform — like Modrinth or CurseForge — built with React + Supabase.
